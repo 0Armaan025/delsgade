@@ -68,12 +68,12 @@ const ArmaanProjectsPage: React.FC = () => {
       <div className="mybg" ref={particlesContainer}>
         <div className="flex flex-col justify-start items-start px-4">
           <h2
-            className="text-white font-semibold text-3xl mt-2 underline-offset-8 decoration-blue-300 decoration-slice decoration-wavy underline"
+            className="text-white font-semibold text-3xl mt-6 underline-offset-8 decoration-blue-300 decoration-slice decoration-wavy underline"
             style={{ fontFamily: "Poppins, sans-serif" }}
           >
             Some mystical dimensions to traverse in my castle:
           </h2>
-          <div className="projects grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6">
+          <div className="projects  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6">
             <ProjectTile
               description="Velit anim fugiat anim fugiat enim. Proident duis consectetur est aliquip..."
               image="https://images.unsplash.com/photo-1719937206589-d13b6b008196?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8"

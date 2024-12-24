@@ -13,7 +13,7 @@ const Navbar = (props: Props) => {
 
   const handleNavbarDoubleOrTripleClick = () => {
     setClickCount(clickCount + 1);
-    alert("You have clicked it like 2 to three times");
+    window.location.href = "/about";
   };
 
   return (
