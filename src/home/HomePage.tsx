@@ -74,7 +74,7 @@ const HomePage: React.FC = () => {
     <div className="background" ref={particlesContainer}>
       <div className="content">
         {showFirstText && <h1 className="title">Merry Christmas!</h1>}
-        {showSecondText && (
+        {showSecondText && ( 
           <div className="text-section">
             <h1 className="title">
               Welcome to Delsgade, the projects castle of{" "}
