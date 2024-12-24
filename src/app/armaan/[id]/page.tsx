@@ -129,9 +129,9 @@ const ProjectInformationPage: React.FC<ProjectInformationPageProps> = ({
 
   return (
     <>
-      <div className="relative overflow-scroll h-full">
+      <div className="relative overflow-scroll h-full bg-[#0b1e30]">
         <div
-          className="background absolute top-0 left-0 w-full h-full"
+          className="background absolute bg-[#0b1e30] top-0 left-0 w-full h-full"
           ref={particlesContainer}
         ></div>
         <Navbar />
