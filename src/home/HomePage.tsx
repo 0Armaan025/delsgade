@@ -1,7 +1,10 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const HomePage: React.FC = () => {
+  const [showFirstText, setShowFirstText] = useState(true);
+  const [showSecondText, setShowSecondText] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
   const particlesContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -9,7 +12,7 @@ const HomePage: React.FC = () => {
     if (!container) return;
 
     // Generate particles dynamically
-    const particleCount = 20; // Adjust number of particles
+    const particleCount = 20;
     const particles: HTMLDivElement[] = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -23,26 +26,84 @@ const HomePage: React.FC = () => {
     }
 
     // Generate snowflakes dynamically
-    const snowflakeCount = 50; // Number of snowflakes
+    const snowflakeCount = 50;
     const snowflakes: HTMLDivElement[] = [];
 
     for (let i = 0; i < snowflakeCount; i++) {
       const snowflake = document.createElement("div");
       snowflake.className = "snowflake";
       snowflake.style.left = `${Math.random() * 100}%`;
-      snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random speed
+      snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
       container.appendChild(snowflake);
       snowflakes.push(snowflake);
     }
 
-    // Clean up particles and snowflakes on unmount
+    // Add Christmas lights along the edges
+    const lightCount = 15;
+    const lights: HTMLDivElement[] = [];
+
+    for (let i = 0; i < lightCount; i++) {
+      const light = document.createElement("div");
+      light.className = "light";
+      light.style.top = "0";
+      light.style.left = `${(i / lightCount) * 100}%`;
+      light.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      container.appendChild(light);
+      lights.push(light);
+    }
+
+    // Transition between texts
+    setTimeout(() => {
+      setShowFirstText(false);
+      setShowSecondText(true);
+    }, 2000);
+
+    // Clean up elements on unmount
     return () => {
       particles.forEach((particle) => particle.remove());
       snowflakes.forEach((snowflake) => snowflake.remove());
+      lights.forEach((light) => light.remove());
     };
   }, []);
 
-  return <div className="background" ref={particlesContainer}></div>;
+  const handleButtonClick = () => {
+    window.location.href="/armaan";
+  };
+
+  return (
+    <div className="background" ref={particlesContainer}>
+      <div className="content">
+        {showFirstText && <h1 className="title">Merry Christmas!</h1>}
+        {showSecondText && (
+          <div className="text-section">
+            <h1 className="title">
+              Welcome to Delsgade, the projects castle of{" "}
+              <span className="font-bold" style={{ color: "green" }}>
+                The Eternal Overlord of the Code Realms,
+              </span>{" "}
+              <span className="font-bold" style={{ color: "yellow" }}>
+                Armaan
+              </span>
+            </h1>
+            {!showProjects && (
+              <button className="enter-button" onClick={handleButtonClick}>
+                Go ahead and enter the castle
+              </button>
+            )}
+          </div>
+        )}
+        {showProjects && (
+          <div className="projects-grid">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <div className="project-tile" key={index}>
+                Project {index + 1}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default HomePage;

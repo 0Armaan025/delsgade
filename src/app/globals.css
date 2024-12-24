@@ -2,17 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* globals.css */
-
+/* General Styles */
 body,
 html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: sans-serif;
+  font-family: "Arial", sans-serif;
   overflow: hidden;
-  background-color: #1f1f1f; /* Dark background */
+  background-color: #0b1e30; /* Dark background */
 }
 
 /* Gradient Background */
@@ -20,17 +19,118 @@ html {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    #2e3a59,
-    #1f2b3d,
-    #3a4f71
-  ); /* Darker gradient */
+  background: linear-gradient(120deg, #2e3a59, #1f2b3d, #3a4f71);
   background-size: 300% 300%;
   /* animation: gradientShift 8s infinite ease-in-out; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* Gradient Animation */
+/* Snowfall */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0.9;
+  animation: fall 10s infinite linear;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  100% {
+    transform: translateY(100vh) translateX(-50px);
+  }
+}
+
+/* Lights */
+.light {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.7);
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Content */
+.content {
+  color: white;
+  z-index: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  color: #ff4444;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.text-section {
+  animation: fadeIn 1s ease-in;
+}
+
+.enter-button {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.enter-button:hover {
+  background-color: #e53935;
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+.project-tile {
+  background: #1f1f1f;
+  color: #fff;
+  border: 2px solid #ff4444;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.project-tile:hover {
+  transform: translateY(-5px);
+  background-color: #292929;
+}
+
+/* Animations */
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -43,49 +143,11 @@ html {
   }
 }
 
-/* Snowfall */
-.snowflake {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background-color: white;
-  border-radius: 50%;
-  opacity: 0.9;
-  animation: fall 10s infinite linear;
-}
-
-/* Snowfall Animation */
-@keyframes fall {
-  0% {
-    transform: translateY(0) translateX(0);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  100% {
-    transform: translateY(100vh) translateX(-50px); /* Falling effect */
+  to {
+    opacity: 1;
   }
 }
-
-/* Particles 
- .particle {
-  position: absolute;
-  /* width: 10px; */
-/* height: 10px; */
-/* background: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.5);
-  animation: floatParticle linear infinite;
-}  */
-
-/* Float Animation 
-@keyframes floatParticle {
-  0% {
-    transform: translateY(0) translateX(0);
-  }
-  50% {
-    transform: translateY(-30px) translateX(15px);
-  }
-  100% {
-    transform: translateY(0) translateX(0);
-  }
-} */
