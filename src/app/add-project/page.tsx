@@ -195,7 +195,7 @@ const ProjectSubmissionPage = () => {
               <label className="text-gray-300">
                 This thing is very important and case sensitive. This will
                 determine the location of where your projects are stored, e.g.,
-                'deslgade.vercel.com/armaan'
+                'deslgade.vercel.app/armaan'
               </label>
               <input
                 type="text"

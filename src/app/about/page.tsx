@@ -159,7 +159,7 @@ const AboutPage = (props: Props) => {
                   onChange={(e) =>
                     setFeedback({ ...feedback, name: e.target.value })
                   }
-                  className="p-3 rounded-lg text-black focus:outline-none"
+                  className="p-3 rounded-lg text-black focus:outline-none w-full mx-6"
                 />
                 <textarea
                   placeholder="Your Message(I, The Eternal overlord of the great Code Realms, Armaan will be glad to read your message/feedback!)"
@@ -167,12 +167,12 @@ const AboutPage = (props: Props) => {
                   onChange={(e) =>
                     setFeedback({ ...feedback, message: e.target.value })
                   }
-                  className="p-3 rounded-lg text-black focus:outline-none"
+                  className="p-3 rounded-lg text-black focus:outline-none w-full mx-6"
                   rows={4}
                 ></textarea>
                 <button
                   type="submit"
-                  className="bg-[#22c55e] text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
+                  className="bg-[#22c55e] text-white px-6 py-2 rounded-lg w-full mx-6 hover:bg-green-700 transition"
                 >
                   Submit
                 </button>
