@@ -2,6 +2,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import Navbar from "@/components/navbar/Navbar";
 import "./projectsubmission.css"; // Ensure to include relevant CSS for particles and snowfall effects
+import { db } from "../firebase/firebaseConfig";
+import { v4 as uuidv4 } from "uuid"; // Import UUID library to generate random IDs
+import { collection, doc, setDoc } from "firebase/firestore";
 
 type ProjectForm = {
   username: string;
@@ -100,6 +103,61 @@ const ProjectSubmissionPage = () => {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!projectForm.username || !projectForm.title) {
+      alert("Username and Project Title are required!");
+      return;
+    }
+
+    const { username, title, images, ...rest } = projectForm;
+    const projectId = title.toLowerCase().replace(/\s+/g, "-"); // Generate a unique ID from the title
+
+    // Remove empty strings from images array
+    const filteredImages = images.filter((image) => image.trim() !== "");
+
+    try {
+      const projectDocRef = doc(
+        db,
+        "projects",
+        username,
+        "projects",
+        projectId
+      );
+
+      // Set the project document with likeCount and images
+      await setDoc(projectDocRef, {
+        ...rest,
+        images: filteredImages,
+        likeCount: 0, // Add likeCount field with a default value of 0
+        createdAt: new Date().toISOString(),
+      });
+
+      // Add a subcollection for comments
+      const commentsRef = collection(projectDocRef, "comments");
+
+      // Example dummy comments
+
+      // Add each comment as a document with a random ID
+
+      // alert("Project submitted successfully with comments!");
+      setProjectForm({
+        username: "",
+        title: "",
+        description: "",
+        tags: [],
+        sourceCodeUrl: "",
+        demoUrl: "",
+        apkUrl: "",
+        ipaUrl: "",
+        images: ["", "", "", "", ""],
+      });
+    } catch (error) {
+      console.error("Error submitting project:", error);
+      alert("An error occurred while submitting the project.");
+    }
+  };
+
   return (
     <div
       className="myBg bg-[#0b1e30] overflow-auto h-full"
@@ -132,14 +190,13 @@ const ProjectSubmissionPage = () => {
         </div>
       ) : (
         <div className="project-form bg-transparent mt-12 p-6 w-3/4 lg:w-1/2 mx-auto">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="text-gray-300">
-                This thing is very important and case sensitive, this will
-                determine the location of where your projects are gonna be, eg:
+                This thing is very important and case sensitive. This will
+                determine the location of where your projects are stored, e.g.,
                 'deslgade.vercel.com/armaan'
               </label>
-
               <input
                 type="text"
                 name="username"
@@ -149,6 +206,7 @@ const ProjectSubmissionPage = () => {
                 className="p-3 mt-2 w-full rounded-lg text-black focus:outline-none"
               />
             </div>
+
             <div className="mb-4">
               <input
                 type="text"
@@ -163,7 +221,7 @@ const ProjectSubmissionPage = () => {
               <textarea
                 name="description"
                 placeholder="Project Description (max 60 words)"
-                maxLength={60}
+                maxLength={300}
                 value={projectForm.description}
                 onChange={handleInputChange}
                 className="p-3 w-full rounded-lg text-black focus:outline-none"
@@ -251,6 +309,7 @@ const ProjectSubmissionPage = () => {
                 />
               ))}
             </div>
+
             <button
               type="submit"
               className="mt-4 bg-[#22c55e] text-white px-6 py-2 rounded-full hover:bg-green-700 transition"

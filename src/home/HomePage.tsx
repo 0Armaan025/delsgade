@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import "../../src/app/globals.css";
 
 const HomePage: React.FC = () => {
   const [showFirstText, setShowFirstText] = useState(true);
@@ -71,10 +72,9 @@ const HomePage: React.FC = () => {
 
   return (
     <div
-      className="relative bg-[#0b1e30] h-screen w-screen overflow-hidden flex items-center justify-center"
+      className=" relative bg-[#0b1e30] h-screen w-screen overflow-hidden flex items-center justify-center"
       ref={particlesContainer}
     >
-      <div className="absolute inset-0 z-0"></div>
       <div className="z-10 text-center">
         {showFirstText && (
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-red-500  ">
@@ -83,25 +83,21 @@ const HomePage: React.FC = () => {
         )}
         {showSecondText && (
           <div className="text-center px-4">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
               Welcome to Delsgade, the projects castle of{" "}
-              <span className="text-green-500">The Eternal Overlord</span>,{" "}
-              <span className="text-yellow-500">Armaan</span>.
+              <span className="text-green-500">
+                The Eternal Overlord of the Code Realms
+              </span>
+              , <span className="text-yellow-500">Armaan</span>.
             </h1>
             <button
-              className="mt-6 bg-red-500 text-white px-6 py-6 rounded-md text-xl md:text-xl hover:bg-red-600 transition"
+              className="mt-6 bg-red-500 z-999 text-white px-6 py-6 rounded-md text-xl md:text-xl hover:bg-red-600 transition"
               onClick={handleButtonClick}
             >
               Go ahead and enter the castle
             </button>
           </div>
         )}
-      </div>
-      <div
-        className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"
-        ref={particlesContainer}
-      >
-        {/* Particles and snowflakes dynamically rendered */}
       </div>
     </div>
   );

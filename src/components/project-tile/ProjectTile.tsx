@@ -1,23 +1,25 @@
 import React from "react";
 import "./project-tile.css";
+import Link from "next/link";
 
 type Props = {
+  username: string;
   image: string;
   name: string;
   description: string;
   tag: string; // e.g., 'Game', 'Website', etc.
 };
 
-const ProjectTile = ({ image, name, description, tag }: Props) => {
+const ProjectTile = ({username, image, name, description, tag }: Props) => {
   // Truncate description to 40 characters
   const truncatedDescription =
     description.length > 40 ? description.slice(0, 40) + "..." : description;
 
   return (
+    <Link href={`/${username}/${name}`} passHref>
     <div className="project-tile z-999 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-2xl transition-all">
-      {/* Project Tag */}
+     
 
-      {/* Project Image */}
       <img
         src={image}
         alt={name}
@@ -34,6 +36,7 @@ const ProjectTile = ({ image, name, description, tag }: Props) => {
       {/* Project Description */}
       <p className="text-sm">{truncatedDescription}</p>
     </div>
+    </Link>
   );
 };
 

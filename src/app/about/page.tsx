@@ -1,6 +1,8 @@
 "use client";
 import Navbar from "@/components/navbar/Navbar";
 import React, { useEffect, useRef, useState } from "react";
+import { db } from "@/app/firebase/firebaseConfig"; // Make sure this is the correct import for your Firebase config
+import { collection, addDoc, serverTimestamp } from "firebase/firestore"; // Firebase Firestore functions
 import "./aboutpage.css";
 
 type Props = {};
@@ -63,11 +65,24 @@ const AboutPage = (props: Props) => {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (feedback.name && feedback.message) {
-      setSubmitted(true);
-      setFeedback({ name: "", message: "" }); // Reset the form fields
+      try {
+        // Add feedback to Firestore
+        const feedbackRef = collection(db, "feedbacks");
+        await addDoc(feedbackRef, {
+          name: feedback.name,
+          message: feedback.message,
+          date: serverTimestamp(), // This will automatically add the current date and time
+        });
+
+        setSubmitted(true);
+        setFeedback({ name: "", message: "" }); // Reset the form fields
+      } catch (error) {
+        console.error("Error submitting feedback: ", error);
+      }
     }
   };
 
