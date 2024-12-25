@@ -29,6 +29,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
 - open ``http://localhost:3000/`` and yay! you have it ready
 
 ### Thanks for viewing this! :D
+### Easter egg: double click the navbar.
 ### Also, I invite cybersecurity people to try to hack this website, I made this hackable on purpose :) , I allow/permit all sorts of pentesting techniques, please raise an issue or discussion if you are able to hack it, or just mail me :D, all the best!
 ### This is as a joke (not serious), Delsgade was the name of a real castle that existed 2000 years ago in the mythical age (The Misfit of the Demon King Academy)
 
